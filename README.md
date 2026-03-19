@@ -1,9 +1,14 @@
 # Quantum Computing in 2 Hours
 
-An educational Jupyter notebook teaching quantum computing concepts in a
+Educational Jupyter notebooks teaching quantum computing concepts in a
 workshop format. Topics covered include quantum mechanics foundations,
-classical computing background, quantum gates, OpenQASM programming,
-and a "Quantum Spy Hunter" key distribution protocol.
+classical computing background, and quantum gates. Two variants are
+available:
+
+- **`QuantumComputing.ipynb`** — OpenQASM programming and a "Quantum
+  Spy Hunter" key distribution application.
+- **`QuantumComputing_QEC.ipynb`** — Quantum error correction, from
+  repetition codes to the surface code (uses Cirq and Stim).
 
 ## Prerequisites
 
@@ -59,8 +64,10 @@ Managed in `pyproject.toml` and locked in `uv.lock`:
 - **jupyterlab** — notebook interface
 - **qiskit** — quantum circuit SDK
 - **qiskit-aer** — local quantum simulator
+- **cirq-core** — quantum circuit framework (Google)
+- **stim** — fast stabilizer circuit simulator for QEC
 - **matplotlib** — visualization
-- **scipy** — scientific computing (used by Qiskit)
+- **scipy** — scientific computing
 
 To update dependencies:
 
