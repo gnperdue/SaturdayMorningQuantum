@@ -1,0 +1,12 @@
+[project]
+name = "saturdaymorningquantum"
+version = "0.1.0"
+description = "Quantum Computing in 2 Hours - educational Jupyter notebook"
+requires-python = ">=3.14"
+dependencies = [
+    "jupyterlab>=4.5.6",
+    "matplotlib>=3.10.8",
+    "qiskit>=2.3.1",
+    "qiskit-aer>=0.17.2",
+    "scipy>=1.17.1",
+]
