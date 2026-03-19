@@ -2,8 +2,8 @@
 
 An educational Jupyter notebook teaching quantum computing concepts in a
 workshop format. Topics covered include quantum mechanics foundations,
-classical computing background, quantum gates, OpenQASM programming, IBM
-Quantum hardware, and a "Quantum Spy Hunter" key distribution protocol.
+classical computing background, quantum gates, OpenQASM programming,
+and a "Quantum Spy Hunter" key distribution protocol.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ cd SaturdayMorningQuantum
 ### 3. Launch JupyterLab
 
 ```sh
-uv run jupyter lab QuantumComputing_2025_03.ipynb
+uv run jupyter lab QuantumComputing.ipynb
 ```
 
 On the first run, `uv` will automatically:
@@ -50,7 +50,7 @@ On the first run, `uv` will automatically:
 3. Install all dependencies from `pyproject.toml`
 4. Start JupyterLab
 
-Open `QuantumComputing_2025_03.ipynb` in the JupyterLab file browser.
+Open `QuantumComputing.ipynb` in the JupyterLab file browser.
 
 ## Dependencies
 
