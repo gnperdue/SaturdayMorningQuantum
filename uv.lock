@@ -1202,6 +1202,24 @@ wheels = [
 ]
 
 [[package]]
+name = "pymatching"
+version = "2.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "matplotlib" },
+    { name = "networkx" },
+    { name = "numpy" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7d/19/39472c89d532e576890320eff5e9738e4b4d7828d027315f7e198ba0be8c/pymatching-2.4.0.tar.gz", hash = "sha256:0c30dafa506b086f50d15530debd7b7b39228597d22c52d5ccd114bcbb0a2326", size = 347169, upload-time = "2026-05-22T18:10:07.471Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/13/65/4289d2923789a407ca34e67b0d44f47caeba1f2219abdfa5f679a66e6e72/pymatching-2.4.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:0e071c90c108daf1c6f8cefcac9ad4989a1a1694fe7433ee413cef7b65f4207e", size = 381252, upload-time = "2026-05-22T18:09:49.122Z" },
+    { url = "https://files.pythonhosted.org/packages/6c/0f/5d532d693eca9bfe49e4a798a3e3d3b05f1da24b8aee7b4e21c3ade55502/pymatching-2.4.0-cp314-cp314-macosx_11_0_x86_64.whl", hash = "sha256:f2390db2679b5009509b6ea1b0838187966c2d8fd1ab8050e5d9b6c908a3ea7e", size = 413276, upload-time = "2026-05-22T18:09:50.624Z" },
+    { url = "https://files.pythonhosted.org/packages/33/13/be44c3e2f8749652c23adc77a94c4efe5383287a4c01a548cc031d0e439c/pymatching-2.4.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:70869b2a4a8fab2f1e54cc0b68fd050b7556133b5ce8c2d2d5d4f4d1319c14d3", size = 625898, upload-time = "2026-05-22T18:09:52.415Z" },
+    { url = "https://files.pythonhosted.org/packages/17/0d/eb2df17fe0bf089c43445ba759e89150a0d36fb7fcbc44e750d8d31f0dbe/pymatching-2.4.0-cp314-cp314-win_amd64.whl", hash = "sha256:5c5ce4ed245d3670ea7d62b09f8a29b105533b032a3d21fdf6df04c9b6441ff1", size = 356304, upload-time = "2026-05-22T18:09:54.3Z" },
+]
+
+[[package]]
 name = "pyparsing"
 version = "3.3.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1479,6 +1497,7 @@ dependencies = [
     { name = "cirq-core" },
     { name = "jupyterlab" },
     { name = "matplotlib" },
+    { name = "pymatching" },
     { name = "qiskit" },
     { name = "qiskit-aer" },
     { name = "scipy" },
@@ -1490,6 +1509,7 @@ requires-dist = [
     { name = "cirq-core", specifier = ">=1.6.1" },
     { name = "jupyterlab", specifier = ">=4.5.6" },
     { name = "matplotlib", specifier = ">=3.10.8" },
+    { name = "pymatching", specifier = ">=2.4.0" },
     { name = "qiskit", specifier = ">=2.3.1" },
     { name = "qiskit-aer", specifier = ">=0.17.2" },
     { name = "scipy", specifier = ">=1.17.1" },
