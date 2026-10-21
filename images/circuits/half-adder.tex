@@ -1,0 +1,24 @@
+\documentclass[border=8pt]{standalone}
+\input{style}
+\usepackage[american]{circuitikz}
+\begin{document}
+\begin{circuitikz}[line width=0.9pt]
+  \draw (4,1.2) node[and port] (and) {};
+  \draw (4,-1.2) node[xor port] (xor) {};
+  % x feeds both gates' upper inputs; y feeds both gates' lower inputs
+  \draw (0,0 |- and.in 1) node[left] {$x$} -- (and.in 1);
+  \draw (0,0 |- xor.in 2) node[left] {$y$} -- (xor.in 2);
+  \draw (1.0,0 |- and.in 1) node[circ] {} |- (xor.in 1);
+  \draw (1.7,0 |- xor.in 2) node[circ] {} |- (and.in 2);
+  \draw (and.out) -- ++(0.6,0) node[right] {$c$ (carry)};
+  \draw (xor.out) -- ++(0.6,0) node[right] {$x \oplus y$ (sum)};
+  \node[left] at (-0.6,0) {\Large HA:};
+  % the four sums
+  \node at (3.6,-3.6) {%
+    \columnsum{0\\ $+\,0$\\ \hline 00} \hspace{1.2em}
+    \columnsum{0\\ $+\,1$\\ \hline 01} \hspace{1.2em}
+    \columnsum{1\\ $+\,0$\\ \hline 01} \hspace{1.2em}
+    \columnsum{1\\ $+\,1$\\ \hline 10} \hspace{2.4em}
+    \columnsum{$x$\\ $+\,y$\\ \hline $c\,(x \oplus y)$}};
+\end{circuitikz}
+\end{document}

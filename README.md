@@ -81,6 +81,12 @@ To update dependencies:
 uv lock --upgrade
 ```
 
+## Circuit drawings
+
+The circuit pictures in `images/circuits/` are drawn in LaTeX (circuitikz and
+quantikz). To change one, edit its `.tex` file and re-render it with
+`images/circuits/build.sh <name>`, which needs `pdflatex` and `pdftoppm`.
+
 ## License
 
 [The Unlicense](https://unlicense.org/) — public domain.

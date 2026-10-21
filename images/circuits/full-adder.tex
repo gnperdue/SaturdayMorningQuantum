@@ -1,0 +1,34 @@
+\documentclass[border=8pt]{standalone}
+\input{style}
+\usepackage[american]{circuitikz}
+\begin{document}
+\begin{circuitikz}[line width=0.9pt,
+    block/.style={draw, minimum width=1.5cm, minimum height=1.5cm, font=\large}]
+  % first half adder: x and y in; its carry leaves on top, its sum below
+  \node[block] (ha1) at (1.75,1.0) {HA};
+  \draw (0,1.45) node[left] {$x$} -- (1.0,1.45);
+  \draw (0,0.55) node[left] {$y$} -- (1.0,0.55);
+  % second half adder: the first sum and the carry-in c
+  \node[block] (ha2) at (4.25,-0.35) {HA};
+  \draw (2.5,0.55) -- (3.0,0.55) |- (3.5,0.1);
+  \draw (0,-0.8) node[left] {$c$} -- (3.5,-0.8);
+  % the OR joins the two carries
+  \draw (7.6,0.8) node[or port] (or) {};
+  \draw (2.5,1.45) -| ([xshift=-0.35cm]or.in 1) -- (or.in 1);
+  \draw (5.0,0.1) -| ([xshift=-0.7cm]or.in 2) -- (or.in 2);
+  \draw (or.out) -- ++(0.6,0) node[right] {$c'$ (carry)};
+  \draw (5.0,-0.8) -- (8.9,-0.8) node[right] {$x \oplus y \oplus c$ (sum)};
+  \node[left] at (-0.6,0.3) {\Large FA:};
+  % the eight sums
+  \node at (4.4,-2.9) {%
+    \columnsum{0\\ 0\\ $+\,0$\\ \hline 00} \hspace{0.7em}
+    \columnsum{0\\ 0\\ $+\,1$\\ \hline 01} \hspace{0.7em}
+    \columnsum{0\\ 1\\ $+\,0$\\ \hline 01} \hspace{0.7em}
+    \columnsum{0\\ 1\\ $+\,1$\\ \hline 10} \hspace{0.7em}
+    \columnsum{1\\ 0\\ $+\,0$\\ \hline 01} \hspace{0.7em}
+    \columnsum{1\\ 0\\ $+\,1$\\ \hline 10} \hspace{0.7em}
+    \columnsum{1\\ 1\\ $+\,0$\\ \hline 10} \hspace{0.7em}
+    \columnsum{1\\ 1\\ $+\,1$\\ \hline 11} \hspace{2em}
+    \columnsum{$x$\\ $+\,y$\\ $+\,c$\\ \hline $c'\,(x \oplus y \oplus c)$}};
+\end{circuitikz}
+\end{document}

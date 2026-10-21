@@ -1,0 +1,43 @@
+\documentclass[border=8pt]{standalone}
+\input{style}
+\usepackage[american]{circuitikz}
+\begin{document}
+\begin{circuitikz}[line width=0.9pt]
+  % NAND: an AND then a NOT, or one gate
+  \draw (1.2,0) node[and port] (a1) {};
+  \draw (a1.in 1) -- ++(-0.5,0) node[left] {$a$};
+  \draw (a1.in 2) -- ++(-0.5,0) node[left] {$b$};
+  \begin{scope}[transform shape, scale=0.8]
+    \draw (3.9,0) node[not port] (n1) {};
+  \end{scope}
+  \draw (a1.out) -- (n1.in);
+  \draw (n1.out) -- ++(0.5,0) node[right] {$a$ NAND $b$};
+  \node at (6.15,0) {\Large $=$};
+  \draw (9.6,0) node[nand port] (g1) {};
+  \draw (g1.in 1) -- ++(-0.5,0) node[left] {$a$};
+  \draw (g1.in 2) -- ++(-0.5,0) node[left] {$b$};
+  \draw (g1.out) -- ++(0.5,0) node[right] {$a$ NAND $b$};
+  \node[below=0.6cm] at (5.4,0) {\truthtable{
+    & $b=0$ & $b=1$ \\ \hline
+    $a=0$ & 1 & 1 \\ \hline
+    $a=1$ & 1 & 0}};
+  % NOR: an OR then a NOT, or one gate
+  \draw (1.2,-4.2) node[or port] (o2) {};
+  \draw (o2.in 1) -- ++(-0.5,0) node[left] {$a$};
+  \draw (o2.in 2) -- ++(-0.5,0) node[left] {$b$};
+  \begin{scope}[transform shape, scale=0.8]
+    \draw (3.9,-5.25) node[not port] (n2) {};
+  \end{scope}
+  \draw (o2.out) -- (n2.in);
+  \draw (n2.out) -- ++(0.5,0) node[right] {$a$ NOR $b$};
+  \node at (6.15,-4.2) {\Large $=$};
+  \draw (9.6,-4.2) node[nor port] (g2) {};
+  \draw (g2.in 1) -- ++(-0.5,0) node[left] {$a$};
+  \draw (g2.in 2) -- ++(-0.5,0) node[left] {$b$};
+  \draw (g2.out) -- ++(0.5,0) node[right] {$a$ NOR $b$};
+  \node[below=0.6cm] at (5.4,-4.2) {\truthtable{
+    & $b=0$ & $b=1$ \\ \hline
+    $a=0$ & 1 & 0 \\ \hline
+    $a=1$ & 0 & 0}};
+\end{circuitikz}
+\end{document}

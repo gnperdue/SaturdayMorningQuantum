@@ -1,0 +1,46 @@
+\documentclass[border=8pt]{standalone}
+\input{style}
+\usepackage[american]{circuitikz}
+\begin{document}
+\begin{circuitikz}[line width=0.9pt]
+  % NOT
+  \begin{scope}[transform shape, scale=0.8]
+    \draw (2.0,0) node[not port] (n) {};
+  \end{scope}
+  \draw (n.in) -- ++(-0.6,0) node[left] {$a$};
+  \draw (n.out) -- ++(0.6,0) node[right] {NOT $a$};
+  \node[below=0.55cm] at (1.6,0) {%
+    \renewcommand{\arraystretch}{1.25}%
+    \begin{tabular}{r|c}
+      $a=0$ & 1 \\ \hline
+      $a=1$ & 0
+    \end{tabular}};
+  % AND
+  \draw (8.6,0) node[and port] (g) {};
+  \draw (g.in 1) -- ++(-0.5,0) node[left] {$a$};
+  \draw (g.in 2) -- ++(-0.5,0) node[left] {$b$};
+  \draw (g.out) -- ++(0.5,0) node[right] {$a$ AND $b$};
+  \node[below=0.55cm] at (8.6,0) {\truthtable{
+    & $b=0$ & $b=1$ \\ \hline
+    $a=0$ & 0 & 0 \\ \hline
+    $a=1$ & 0 & 1}};
+  % OR
+  \draw (1.6,-4.2) node[or port] (o) {};
+  \draw (o.in 1) -- ++(-0.5,0) node[left] {$a$};
+  \draw (o.in 2) -- ++(-0.5,0) node[left] {$b$};
+  \draw (o.out) -- ++(0.5,0) node[right] {$a$ OR $b$};
+  \node[below=0.55cm] at (1.6,-4.2) {\truthtable{
+    & $b=0$ & $b=1$ \\ \hline
+    $a=0$ & 0 & 1 \\ \hline
+    $a=1$ & 1 & 1}};
+  % XOR
+  \draw (8.6,-4.2) node[xor port] (x) {};
+  \draw (x.in 1) -- ++(-0.5,0) node[left] {$a$};
+  \draw (x.in 2) -- ++(-0.5,0) node[left] {$b$};
+  \draw (x.out) -- ++(0.5,0) node[right] {$a$ XOR $b$};
+  \node[below=0.55cm] at (8.6,-4.2) {\truthtable{
+    & $b=0$ & $b=1$ \\ \hline
+    $a=0$ & 0 & 1 \\ \hline
+    $a=1$ & 1 & 0}};
+\end{circuitikz}
+\end{document}

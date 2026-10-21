@@ -1,0 +1,20 @@
+% Shared look for every circuit drawing: a sans-serif font (text and math),
+% black lines, and white space around the picture.
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.95]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath}
+\sansmath
+\usepackage{amsmath}
+\usepackage{array}
+\providecommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\truthtable}[1]{%
+  \renewcommand{\arraystretch}{1.25}%
+  \begin{tabular}{r|c|c}
+    #1
+  \end{tabular}}
+\newcommand{\columnsum}[1]{%
+  \renewcommand{\arraystretch}{1.1}%
+  \begin{tabular}{@{}r@{}}
+    #1
+  \end{tabular}}
