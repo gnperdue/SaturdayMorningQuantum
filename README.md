@@ -2,13 +2,18 @@
 
 Educational Jupyter notebooks teaching quantum computing concepts in a
 workshop format. Topics covered include quantum mechanics foundations,
-classical computing background, and quantum gates. Two variants are
-available:
+classical computing background, quantum gates, and fault-tolerant
+quantum computing. There are two notebooks:
 
-- **`QuantumComputing.ipynb`** — OpenQASM programming and a "Quantum
-  Spy Hunter" key distribution application.
-- **`QuantumComputing_QEC.ipynb`** — Quantum error correction, from
-  repetition codes to the surface code (uses Cirq and Stim).
+- **`QuantumComputing.ipynb`** — the lecture: OpenQASM programming on a
+  simulator, digital (fault-tolerant) quantum computing and its
+  algorithms, two demos (a quantum adder and a rotation built from H, S
+  and T gates, with a precessing spin), and a bonus "Quantum Spy Hunter"
+  key distribution application.
+- **`QuantumComputing_QEC.ipynb`** — the companion on quantum error
+  correction: repetition codes, the surface code and its threshold, and
+  how magic states and T factories make fault-tolerant gates (uses Cirq,
+  Stim and PyMatching).
 
 ## Prerequisites
 
@@ -66,6 +71,7 @@ Managed in `pyproject.toml` and locked in `uv.lock`:
 - **qiskit-aer** — local quantum simulator
 - **cirq-core** — quantum circuit framework (Google)
 - **stim** — fast stabilizer circuit simulator for QEC
+- **pymatching** — decoder for the surface-code threshold experiment
 - **matplotlib** — visualization
 - **scipy** — scientific computing
 
