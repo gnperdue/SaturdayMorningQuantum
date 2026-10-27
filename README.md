@@ -15,6 +15,10 @@ quantum computing. There are two notebooks:
   how magic states and T factories make fault-tolerant gates (uses Cirq,
   Stim and PyMatching).
 
+The lecture's second demo imports its code from `dial_demo.py`, written to
+be followed step by step with pencil and paper. `dial_demo_numpy.py` does
+the same calculations the compact NumPy way, for comparison.
+
 ## Prerequisites
 
 - [uv](https://docs.astral.sh/uv/) (Python package and project manager)
