@@ -196,18 +196,22 @@ def best_by_t_budget(score, max_t):
 
     Trying every list of gates would take forever. A theorem saves us (Matsumoto and Amano,
     arXiv:0806.3834): every operator made of H, S and T can be written in exactly one
-    standard form,
+    standard form, in three parts,
 
-        a Clifford gate, then blocks of 'T H' or 'T H S', then maybe one more T,
+        a Clifford gate  |  blocks, each 'T H' or 'T H S'  |  maybe one more T
+        (acts first)     |  (the "middle part")            |  (the "last T")
 
     and this form has the fewest T gates possible. Each block holds one T gate. So we try
     each standard form once: every choice of blocks, with and without the last T, after
     each of the 24 Clifford gates.
     """
     best = {}                     # for each exact T count: (score, gate list), the best so far
-    middles = [([], IDENTITY)]    # every choice of blocks so far, with its matrix; first, none
+    # The search goes in rounds. In round n, `middles` holds every middle part with exactly
+    # n blocks, each with its matrix. Round 0 has just one middle part: no blocks at all.
+    middles = [([], IDENTITY)]
     for n_blocks in range(max_t + 1):
         for middle_gates, middle_matrix in middles:
+            # Try each middle part twice: without a last T, and with one.
             for last_gates in ([], ['t']):
                 n_t = n_blocks + len(last_gates)
                 if n_t > max_t:
@@ -217,6 +221,8 @@ def best_by_t_budget(score, max_t):
                 found = best_after_a_clifford(score, middle_gates + last_gates, matrix)
                 if n_t not in best or found[0] < best[n_t][0]:
                     best[n_t] = found
+        # The round is over. For the next round, `middles` becomes a NEW list in which every
+        # middle part is one block longer. (Nothing is added to a list while we loop over it.)
         if n_blocks < max_t:
             middles = one_block_longer(middles)
     return best_within_budget(best, max_t)
@@ -239,12 +245,28 @@ def best_after_a_clifford(score, gates, matrix):
 
 
 def one_block_longer(middles):
-    """Every middle part made one block longer: once with 'T H' added, once with 'T H S'."""
+    """Every middle part made one block longer, in both possible ways.
+
+    Each middle part becomes two new ones: one with 'T H' added, and one with 'T H S'
+    added. So the list doubles every round, and together the lists try every choice:
+
+        round 0:  (no blocks)
+        round 1:  TH   THS
+        round 2:  TH TH   TH THS   THS TH   THS THS
+        round 3:  eight middle parts, and so on
+
+    Any one gate sequence makes one choice for each block, which is why a printed sequence
+    has 'T H' in some places and 'T H S' in others.
+    """
     longer = []
     for middle_gates, middle_matrix in middles:
-        for block in (['t', 'h'], ['t', 'h', 's']):
-            # The block acts after the middle part, so its matrix goes on the left.
-            longer.append((middle_gates + block, multiply(gate_product(block), middle_matrix)))
+        # A new block acts after the middle part, so its matrix goes on the left.
+        # The first new middle part: add 'T H'.
+        gates = middle_gates + ['t', 'h']
+        longer.append((gates, multiply(gate_product(['t', 'h']), middle_matrix)))
+        # The second new middle part: add 'T H S' instead.
+        gates = middle_gates + ['t', 'h', 's']
+        longer.append((gates, multiply(gate_product(['t', 'h', 's']), middle_matrix)))
     return longer
 
 
