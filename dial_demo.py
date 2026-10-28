@@ -205,7 +205,8 @@ def best_by_t_budget(score, max_t):
     each standard form once: every choice of blocks, with and without the last T, after
     each of the 24 Clifford gates.
     """
-    best = {}                     # for each exact T count: (score, gate list), the best so far
+    best_score = {}               # for each exact T count: the best score so far
+    best_gates = {}               # ... and the gate list that has it
     # The search goes in rounds. In round n, `middles` holds every middle part with exactly
     # n blocks, each with its matrix. Round 0 has just one middle part: no blocks at all.
     middles = [([], IDENTITY)]
@@ -218,14 +219,16 @@ def best_by_t_budget(score, max_t):
                     continue
                 # The last T acts after the blocks, so its matrix goes on the left.
                 matrix = multiply(gate_product(last_gates), middle_matrix)
-                found = best_after_a_clifford(score, middle_gates + last_gates, matrix)
-                if n_t not in best or found[0] < best[n_t][0]:
-                    best[n_t] = found
+                gates = middle_gates + last_gates
+                found_score, found_gates = best_after_a_clifford(score, gates, matrix)
+                if n_t not in best_score or found_score < best_score[n_t]:
+                    best_score[n_t] = found_score
+                    best_gates[n_t] = found_gates
         # The round is over. For the next round, `middles` becomes a NEW list in which every
         # middle part is one block longer. (Nothing is added to a list while we loop over it.)
         if n_blocks < max_t:
             middles = one_block_longer(middles)
-    return best_within_budget(best, max_t)
+    return best_within_budget(best_score, best_gates, max_t)
 
 
 def best_after_a_clifford(score, gates, matrix):
@@ -270,17 +273,19 @@ def one_block_longer(middles):
     return longer
 
 
-def best_within_budget(best, max_t):
+def best_within_budget(best_score, best_gates, max_t):
     """From the best gate list for each exact T count, the best within each budget.
 
     A budget of n T gates allows any count from 0 to n, so we keep the best seen so far.
     """
     within_budget = []
-    record = None
+    record_score = None
+    record_gates = None
     for n_t in range(max_t + 1):
-        if record is None or best[n_t][0] < record[0]:
-            record = best[n_t]
-        within_budget.append(record[1])        # keep the gate list, drop its score
+        if record_score is None or best_score[n_t] < record_score:
+            record_score = best_score[n_t]
+            record_gates = best_gates[n_t]
+        within_budget.append(record_gates)     # keep the gate list
     return within_budget
 
 
