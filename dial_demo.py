@@ -333,9 +333,10 @@ def qiskit_rotation(angle, epsilon):
     """The gate list Qiskit's compiler gives for a turn of `angle` radians about z.
 
     Qiskit uses the Ross-Selinger method, which finds a nearly shortest sequence with an
-    error below `epsilon`. Qiskit 2.3.1 crashes on many angles when epsilon is larger than
-    about 1e-4 (a bug in its gridsynth_rz). The lecture's 18-degree step is tested; if you
-    try other angles, keep epsilon at 1e-6 or smaller.
+    error below `epsilon`. Qiskit 2.3.1 crashes on some angles when epsilon is 1e-4 or larger
+    (a bug in its gridsynth_rz, which Python reports as a PanicException; at 1e-3 about one
+    angle in ten fails). The lecture's 18-degree step is tested; if you try other angles,
+    keep epsilon at 1e-6 or smaller.
     """
     circuit = gridsynth_rz(angle, epsilon)
     gates = []
@@ -366,6 +367,7 @@ def plot_spin(step_angle, steps, chances_left):
     """Plot the spin's exact motion and, for each step in `steps`, its measured chances of Left.
 
     `chances_left[i]` holds the measured chances after 0, 1, ..., 20 steps of `steps[i]`.
+    There are colors for up to six steps.
     """
     fig, ax = plt.subplots(figsize=(9, 5.5), facecolor='#fcfcfb')
     ax.set_facecolor('#fcfcfb')
@@ -377,7 +379,7 @@ def plot_spin(step_angle, steps, chances_left):
         smooth_chance.append(math.sin(k * step_angle / 2) ** 2)
     ax.plot(smooth_k, smooth_chance, color='#52514e', linewidth=1.5, zorder=3,
             label='the exact motion')
-    colors = ['#2a78d6', '#eb6834', '#1baf7a']
+    colors = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300']
     for i in range(len(steps)):
         ax.plot(range(21), chances_left[i], color=colors[i], linewidth=2, marker='o',
                 markersize=8, markeredgecolor='#fcfcfb', markeredgewidth=2,
